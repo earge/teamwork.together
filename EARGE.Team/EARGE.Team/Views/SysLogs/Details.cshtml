@@ -1,0 +1,50 @@
+﻿@model EARGE.DataLayer.SysLog
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SysLog</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TargetObjectId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TargetObjectId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SysLogType.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SysLogType.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamMember.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamMember.Email)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

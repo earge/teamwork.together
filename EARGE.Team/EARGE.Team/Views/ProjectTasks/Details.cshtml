@@ -1,0 +1,114 @@
+﻿@model EARGE.DataLayer.ProjectTask
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ProjectTask</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PublishedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PublishedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TargetGroups)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TargetGroups)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssignedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssignedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompletedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompletedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HoursEffort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoursEffort)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BudgetAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BudgetAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Project.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Project.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaskStatus.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaskStatus.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamMember.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamMember.Email)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

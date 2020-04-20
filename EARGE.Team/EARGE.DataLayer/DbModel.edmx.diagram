@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a4284c7178d44cd993a490de708899b7" Name="Diagram1">
+        <EntityTypeShape EntityType="EARGETeamDBModel.MoneyIncome" Width="1.5" PointX="3" PointY="8" />
+        <EntityTypeShape EntityType="EARGETeamDBModel.MoneyOutgoing" Width="1.5" PointX="5.25" PointY="15" />
+        <EntityTypeShape EntityType="EARGETeamDBModel.Project" Width="1.5" PointX="3" PointY="22.5" />
+        <EntityTypeShape EntityType="EARGETeamDBModel.ProjectTask" Width="1.5" PointX="8.25" PointY="15" />
+        <EntityTypeShape EntityType="EARGETeamDBModel.Role" Width="1.5" PointX="3.75" PointY="5.25" />
+        <EntityTypeShape EntityType="EARGETeamDBModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EARGETeamDBModel.SysLog" Width="1.5" PointX="3" PointY="12" />
+        <EntityTypeShape EntityType="EARGETeamDBModel.SysLogType" Width="1.5" PointX="0.75" PointY="14.375" />
+        <EntityTypeShape EntityType="EARGETeamDBModel.TaskStatus" Width="1.5" PointX="6" PointY="20.25" />
+        <EntityTypeShape EntityType="EARGETeamDBModel.TeamMemberRole" Width="1.5" PointX="6" PointY="10.25" />
+        <EntityTypeShape EntityType="EARGETeamDBModel.TeamMember" Width="1.5" PointX="0.75" PointY="8.875" />
+        <AssociationConnector Association="EARGETeamDBModel.FK_MoneyIncomes_TeamMembers" />
+        <AssociationConnector Association="EARGETeamDBModel.FK_MoneyIncomes_TeamMembers1" />
+        <AssociationConnector Association="EARGETeamDBModel.FK_MoneyOutgoings_Projects" />
+        <AssociationConnector Association="EARGETeamDBModel.FK_MoneyOutgoings_ProjectTasks" />
+        <AssociationConnector Association="EARGETeamDBModel.FK_MoneyOutgoings_TeamMembers" />
+        <AssociationConnector Association="EARGETeamDBModel.FK_MoneyOutgoings_TeamMembers1" />
+        <AssociationConnector Association="EARGETeamDBModel.FK_MoneyOutgoings_TeamMembers2" />
+        <AssociationConnector Association="EARGETeamDBModel.FK_Projects_TeamMembers" />
+        <AssociationConnector Association="EARGETeamDBModel.FK_ProjectTasks_Projects" />
+        <AssociationConnector Association="EARGETeamDBModel.FK_ProjectTasks_TaskStatuses" />
+        <AssociationConnector Association="EARGETeamDBModel.FK_ProjectTasks_TeamMembers" />
+        <AssociationConnector Association="EARGETeamDBModel.FK_TeamMemberRoles_Roles" />
+        <AssociationConnector Association="EARGETeamDBModel.FK_SysLogs_SysLogTypes" />
+        <AssociationConnector Association="EARGETeamDBModel.FK_SysLogs_TeamMembers" />
+        <AssociationConnector Association="EARGETeamDBModel.FK_TeamMemberRoles_TeamMembers" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
