@@ -1,0 +1,960 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EARGETeamDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MoneyIncomes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeamMemberId" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TransactionDate" Type="datetime" Nullable="false" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+          <Property Name="CreateUserId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MoneyOutgoings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeamMemberId" Type="int" Nullable="false" />
+          <Property Name="TaskId" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="CreateUserId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="IsApproved" Type="int" Nullable="false" />
+          <Property Name="Deleted" Type="int" Nullable="false" />
+          <Property Name="ApprovedMemberId" Type="int" />
+          <Property Name="ApprovedDate" Type="datetime" />
+          <Property Name="ProjectId" Type="int" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="Budget" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ProjectOwnerMemberId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectTasks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="PublishedDate" Type="datetime" />
+          <Property Name="AssignedMemberId" Type="int" />
+          <Property Name="TargetGroups" Type="nvarchar(max)" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="AssignedDate" Type="datetime" />
+          <Property Name="CompletedDate" Type="datetime" />
+          <Property Name="HoursEffort" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="BudgetAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="RoleDescription" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="SysLogs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="LogTypeId" Type="int" Nullable="false" />
+          <Property Name="LogCreatedByMemberId" Type="int" />
+          <Property Name="TargetObjectId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysLogTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskStatuses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TeamMemberRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeamMemberId" Type="int" />
+          <Property Name="RoleId" Type="int" />
+        </EntityType>
+        <EntityType Name="TeamMembers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="WebSiteAddress" Type="nvarchar(max)" />
+          <Property Name="CV" Type="nvarchar(max)" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="ProfilePictureUrl" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_MoneyIncomes_TeamMembers">
+          <End Role="TeamMembers" Type="Self.TeamMembers" Multiplicity="1" />
+          <End Role="MoneyIncomes" Type="Self.MoneyIncomes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamMembers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MoneyIncomes">
+              <PropertyRef Name="TeamMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MoneyIncomes_TeamMembers1">
+          <End Role="TeamMembers" Type="Self.TeamMembers" Multiplicity="1" />
+          <End Role="MoneyIncomes" Type="Self.MoneyIncomes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamMembers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MoneyIncomes">
+              <PropertyRef Name="CreateUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MoneyOutgoings_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="0..1" />
+          <End Role="MoneyOutgoings" Type="Self.MoneyOutgoings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MoneyOutgoings">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MoneyOutgoings_ProjectTasks">
+          <End Role="ProjectTasks" Type="Self.ProjectTasks" Multiplicity="0..1" />
+          <End Role="MoneyOutgoings" Type="Self.MoneyOutgoings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectTasks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MoneyOutgoings">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MoneyOutgoings_TeamMembers">
+          <End Role="TeamMembers" Type="Self.TeamMembers" Multiplicity="0..1" />
+          <End Role="MoneyOutgoings" Type="Self.MoneyOutgoings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamMembers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MoneyOutgoings">
+              <PropertyRef Name="ApprovedMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MoneyOutgoings_TeamMembers1">
+          <End Role="TeamMembers" Type="Self.TeamMembers" Multiplicity="1" />
+          <End Role="MoneyOutgoings" Type="Self.MoneyOutgoings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamMembers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MoneyOutgoings">
+              <PropertyRef Name="CreateUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MoneyOutgoings_TeamMembers2">
+          <End Role="TeamMembers" Type="Self.TeamMembers" Multiplicity="1" />
+          <End Role="MoneyOutgoings" Type="Self.MoneyOutgoings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamMembers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MoneyOutgoings">
+              <PropertyRef Name="TeamMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_TeamMembers">
+          <End Role="TeamMembers" Type="Self.TeamMembers" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamMembers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="ProjectOwnerMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTasks_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="ProjectTasks" Type="Self.ProjectTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectTasks">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTasks_TaskStatuses">
+          <End Role="TaskStatuses" Type="Self.TaskStatuses" Multiplicity="1" />
+          <End Role="ProjectTasks" Type="Self.ProjectTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskStatuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectTasks">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTasks_TeamMembers">
+          <End Role="TeamMembers" Type="Self.TeamMembers" Multiplicity="0..1" />
+          <End Role="ProjectTasks" Type="Self.ProjectTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamMembers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectTasks">
+              <PropertyRef Name="AssignedMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysLogs_SysLogTypes">
+          <End Role="SysLogTypes" Type="Self.SysLogTypes" Multiplicity="1" />
+          <End Role="SysLogs" Type="Self.SysLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysLogTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysLogs">
+              <PropertyRef Name="LogTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysLogs_TeamMembers">
+          <End Role="TeamMembers" Type="Self.TeamMembers" Multiplicity="0..1" />
+          <End Role="SysLogs" Type="Self.SysLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamMembers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysLogs">
+              <PropertyRef Name="LogCreatedByMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamMemberRoles_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="TeamMemberRoles" Type="Self.TeamMemberRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeamMemberRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamMemberRoles_TeamMembers">
+          <End Role="TeamMembers" Type="Self.TeamMembers" Multiplicity="0..1" />
+          <End Role="TeamMemberRoles" Type="Self.TeamMemberRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamMembers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeamMemberRoles">
+              <PropertyRef Name="TeamMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EARGETeamDBModelStoreContainer">
+          <EntitySet Name="MoneyIncomes" EntityType="Self.MoneyIncomes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MoneyOutgoings" EntityType="Self.MoneyOutgoings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectTasks" EntityType="Self.ProjectTasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysLogs" EntityType="Self.SysLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysLogTypes" EntityType="Self.SysLogTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskStatuses" EntityType="Self.TaskStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeamMemberRoles" EntityType="Self.TeamMemberRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeamMembers" EntityType="Self.TeamMembers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_MoneyIncomes_TeamMembers" Association="Self.FK_MoneyIncomes_TeamMembers">
+            <End Role="TeamMembers" EntitySet="TeamMembers" />
+            <End Role="MoneyIncomes" EntitySet="MoneyIncomes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MoneyIncomes_TeamMembers1" Association="Self.FK_MoneyIncomes_TeamMembers1">
+            <End Role="TeamMembers" EntitySet="TeamMembers" />
+            <End Role="MoneyIncomes" EntitySet="MoneyIncomes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MoneyOutgoings_Projects" Association="Self.FK_MoneyOutgoings_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="MoneyOutgoings" EntitySet="MoneyOutgoings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MoneyOutgoings_ProjectTasks" Association="Self.FK_MoneyOutgoings_ProjectTasks">
+            <End Role="ProjectTasks" EntitySet="ProjectTasks" />
+            <End Role="MoneyOutgoings" EntitySet="MoneyOutgoings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MoneyOutgoings_TeamMembers" Association="Self.FK_MoneyOutgoings_TeamMembers">
+            <End Role="TeamMembers" EntitySet="TeamMembers" />
+            <End Role="MoneyOutgoings" EntitySet="MoneyOutgoings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MoneyOutgoings_TeamMembers1" Association="Self.FK_MoneyOutgoings_TeamMembers1">
+            <End Role="TeamMembers" EntitySet="TeamMembers" />
+            <End Role="MoneyOutgoings" EntitySet="MoneyOutgoings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MoneyOutgoings_TeamMembers2" Association="Self.FK_MoneyOutgoings_TeamMembers2">
+            <End Role="TeamMembers" EntitySet="TeamMembers" />
+            <End Role="MoneyOutgoings" EntitySet="MoneyOutgoings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_TeamMembers" Association="Self.FK_Projects_TeamMembers">
+            <End Role="TeamMembers" EntitySet="TeamMembers" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTasks_Projects" Association="Self.FK_ProjectTasks_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectTasks" EntitySet="ProjectTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTasks_TaskStatuses" Association="Self.FK_ProjectTasks_TaskStatuses">
+            <End Role="TaskStatuses" EntitySet="TaskStatuses" />
+            <End Role="ProjectTasks" EntitySet="ProjectTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTasks_TeamMembers" Association="Self.FK_ProjectTasks_TeamMembers">
+            <End Role="TeamMembers" EntitySet="TeamMembers" />
+            <End Role="ProjectTasks" EntitySet="ProjectTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysLogs_SysLogTypes" Association="Self.FK_SysLogs_SysLogTypes">
+            <End Role="SysLogTypes" EntitySet="SysLogTypes" />
+            <End Role="SysLogs" EntitySet="SysLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysLogs_TeamMembers" Association="Self.FK_SysLogs_TeamMembers">
+            <End Role="TeamMembers" EntitySet="TeamMembers" />
+            <End Role="SysLogs" EntitySet="SysLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamMemberRoles_Roles" Association="Self.FK_TeamMemberRoles_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="TeamMemberRoles" EntitySet="TeamMemberRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamMemberRoles_TeamMembers" Association="Self.FK_TeamMemberRoles_TeamMembers">
+            <End Role="TeamMembers" EntitySet="TeamMembers" />
+            <End Role="TeamMemberRoles" EntitySet="TeamMemberRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EARGETeamDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="earge_teamDb" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MoneyIncomes" EntityType="EARGETeamDBModel.MoneyIncome" />
+          <EntitySet Name="MoneyOutgoings" EntityType="EARGETeamDBModel.MoneyOutgoing" />
+          <EntitySet Name="Projects" EntityType="EARGETeamDBModel.Project" />
+          <EntitySet Name="ProjectTasks" EntityType="EARGETeamDBModel.ProjectTask" />
+          <EntitySet Name="Roles" EntityType="EARGETeamDBModel.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="EARGETeamDBModel.sysdiagram" />
+          <EntitySet Name="SysLogs" EntityType="EARGETeamDBModel.SysLog" />
+          <EntitySet Name="SysLogTypes" EntityType="EARGETeamDBModel.SysLogType" />
+          <EntitySet Name="TaskStatuses" EntityType="EARGETeamDBModel.TaskStatus" />
+          <EntitySet Name="TeamMemberRoles" EntityType="EARGETeamDBModel.TeamMemberRole" />
+          <EntitySet Name="TeamMembers" EntityType="EARGETeamDBModel.TeamMember" />
+          <AssociationSet Name="FK_MoneyIncomes_TeamMembers" Association="EARGETeamDBModel.FK_MoneyIncomes_TeamMembers">
+            <End Role="TeamMember" EntitySet="TeamMembers" />
+            <End Role="MoneyIncome" EntitySet="MoneyIncomes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MoneyIncomes_TeamMembers1" Association="EARGETeamDBModel.FK_MoneyIncomes_TeamMembers1">
+            <End Role="TeamMember" EntitySet="TeamMembers" />
+            <End Role="MoneyIncome" EntitySet="MoneyIncomes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MoneyOutgoings_Projects" Association="EARGETeamDBModel.FK_MoneyOutgoings_Projects">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="MoneyOutgoing" EntitySet="MoneyOutgoings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MoneyOutgoings_ProjectTasks" Association="EARGETeamDBModel.FK_MoneyOutgoings_ProjectTasks">
+            <End Role="ProjectTask" EntitySet="ProjectTasks" />
+            <End Role="MoneyOutgoing" EntitySet="MoneyOutgoings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MoneyOutgoings_TeamMembers" Association="EARGETeamDBModel.FK_MoneyOutgoings_TeamMembers">
+            <End Role="TeamMember" EntitySet="TeamMembers" />
+            <End Role="MoneyOutgoing" EntitySet="MoneyOutgoings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MoneyOutgoings_TeamMembers1" Association="EARGETeamDBModel.FK_MoneyOutgoings_TeamMembers1">
+            <End Role="TeamMember" EntitySet="TeamMembers" />
+            <End Role="MoneyOutgoing" EntitySet="MoneyOutgoings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MoneyOutgoings_TeamMembers2" Association="EARGETeamDBModel.FK_MoneyOutgoings_TeamMembers2">
+            <End Role="TeamMember" EntitySet="TeamMembers" />
+            <End Role="MoneyOutgoing" EntitySet="MoneyOutgoings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_TeamMembers" Association="EARGETeamDBModel.FK_Projects_TeamMembers">
+            <End Role="TeamMember" EntitySet="TeamMembers" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTasks_Projects" Association="EARGETeamDBModel.FK_ProjectTasks_Projects">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="ProjectTask" EntitySet="ProjectTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTasks_TaskStatuses" Association="EARGETeamDBModel.FK_ProjectTasks_TaskStatuses">
+            <End Role="TaskStatus" EntitySet="TaskStatuses" />
+            <End Role="ProjectTask" EntitySet="ProjectTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTasks_TeamMembers" Association="EARGETeamDBModel.FK_ProjectTasks_TeamMembers">
+            <End Role="TeamMember" EntitySet="TeamMembers" />
+            <End Role="ProjectTask" EntitySet="ProjectTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamMemberRoles_Roles" Association="EARGETeamDBModel.FK_TeamMemberRoles_Roles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="TeamMemberRole" EntitySet="TeamMemberRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysLogs_SysLogTypes" Association="EARGETeamDBModel.FK_SysLogs_SysLogTypes">
+            <End Role="SysLogType" EntitySet="SysLogTypes" />
+            <End Role="SysLog" EntitySet="SysLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysLogs_TeamMembers" Association="EARGETeamDBModel.FK_SysLogs_TeamMembers">
+            <End Role="TeamMember" EntitySet="TeamMembers" />
+            <End Role="SysLog" EntitySet="SysLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamMemberRoles_TeamMembers" Association="EARGETeamDBModel.FK_TeamMemberRoles_TeamMembers">
+            <End Role="TeamMember" EntitySet="TeamMembers" />
+            <End Role="TeamMemberRole" EntitySet="TeamMemberRoles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="MoneyIncome">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamMemberId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+          <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TeamMember" Relationship="EARGETeamDBModel.FK_MoneyIncomes_TeamMembers" FromRole="MoneyIncome" ToRole="TeamMember" />
+          <NavigationProperty Name="TeamMember1" Relationship="EARGETeamDBModel.FK_MoneyIncomes_TeamMembers1" FromRole="MoneyIncome" ToRole="TeamMember" />
+        </EntityType>
+        <EntityType Name="MoneyOutgoing">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamMemberId" Type="Int32" Nullable="false" />
+          <Property Name="TaskId" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsApproved" Type="Int32" Nullable="false" />
+          <Property Name="Deleted" Type="Int32" Nullable="false" />
+          <Property Name="ApprovedMemberId" Type="Int32" />
+          <Property Name="ApprovedDate" Type="DateTime" Precision="3" />
+          <Property Name="ProjectId" Type="Int32" />
+          <NavigationProperty Name="Project" Relationship="EARGETeamDBModel.FK_MoneyOutgoings_Projects" FromRole="MoneyOutgoing" ToRole="Project" />
+          <NavigationProperty Name="ProjectTask" Relationship="EARGETeamDBModel.FK_MoneyOutgoings_ProjectTasks" FromRole="MoneyOutgoing" ToRole="ProjectTask" />
+          <NavigationProperty Name="TeamMember" Relationship="EARGETeamDBModel.FK_MoneyOutgoings_TeamMembers" FromRole="MoneyOutgoing" ToRole="TeamMember" />
+          <NavigationProperty Name="TeamMember1" Relationship="EARGETeamDBModel.FK_MoneyOutgoings_TeamMembers1" FromRole="MoneyOutgoing" ToRole="TeamMember" />
+          <NavigationProperty Name="TeamMember2" Relationship="EARGETeamDBModel.FK_MoneyOutgoings_TeamMembers2" FromRole="MoneyOutgoing" ToRole="TeamMember" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="Budget" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ProjectOwnerMemberId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MoneyOutgoings" Relationship="EARGETeamDBModel.FK_MoneyOutgoings_Projects" FromRole="Project" ToRole="MoneyOutgoing" />
+          <NavigationProperty Name="TeamMember" Relationship="EARGETeamDBModel.FK_Projects_TeamMembers" FromRole="Project" ToRole="TeamMember" />
+          <NavigationProperty Name="ProjectTasks" Relationship="EARGETeamDBModel.FK_ProjectTasks_Projects" FromRole="Project" ToRole="ProjectTask" />
+        </EntityType>
+        <EntityType Name="ProjectTask">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PublishedDate" Type="DateTime" Precision="3" />
+          <Property Name="AssignedMemberId" Type="Int32" />
+          <Property Name="TargetGroups" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="AssignedDate" Type="DateTime" Precision="3" />
+          <Property Name="CompletedDate" Type="DateTime" Precision="3" />
+          <Property Name="HoursEffort" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="BudgetAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MoneyOutgoings" Relationship="EARGETeamDBModel.FK_MoneyOutgoings_ProjectTasks" FromRole="ProjectTask" ToRole="MoneyOutgoing" />
+          <NavigationProperty Name="Project" Relationship="EARGETeamDBModel.FK_ProjectTasks_Projects" FromRole="ProjectTask" ToRole="Project" />
+          <NavigationProperty Name="TaskStatus" Relationship="EARGETeamDBModel.FK_ProjectTasks_TaskStatuses" FromRole="ProjectTask" ToRole="TaskStatus" />
+          <NavigationProperty Name="TeamMember" Relationship="EARGETeamDBModel.FK_ProjectTasks_TeamMembers" FromRole="ProjectTask" ToRole="TeamMember" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="RoleDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TeamMemberRoles" Relationship="EARGETeamDBModel.FK_TeamMemberRoles_Roles" FromRole="Role" ToRole="TeamMemberRole" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="SysLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LogTypeId" Type="Int32" Nullable="false" />
+          <Property Name="LogCreatedByMemberId" Type="Int32" />
+          <Property Name="TargetObjectId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SysLogType" Relationship="EARGETeamDBModel.FK_SysLogs_SysLogTypes" FromRole="SysLog" ToRole="SysLogType" />
+          <NavigationProperty Name="TeamMember" Relationship="EARGETeamDBModel.FK_SysLogs_TeamMembers" FromRole="SysLog" ToRole="TeamMember" />
+        </EntityType>
+        <EntityType Name="SysLogType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SysLogs" Relationship="EARGETeamDBModel.FK_SysLogs_SysLogTypes" FromRole="SysLogType" ToRole="SysLog" />
+        </EntityType>
+        <EntityType Name="TaskStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProjectTasks" Relationship="EARGETeamDBModel.FK_ProjectTasks_TaskStatuses" FromRole="TaskStatus" ToRole="ProjectTask" />
+        </EntityType>
+        <EntityType Name="TeamMemberRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamMemberId" Type="Int32" />
+          <Property Name="RoleId" Type="Int32" />
+          <NavigationProperty Name="Role" Relationship="EARGETeamDBModel.FK_TeamMemberRoles_Roles" FromRole="TeamMemberRole" ToRole="Role" />
+          <NavigationProperty Name="TeamMember" Relationship="EARGETeamDBModel.FK_TeamMemberRoles_TeamMembers" FromRole="TeamMemberRole" ToRole="TeamMember" />
+        </EntityType>
+        <EntityType Name="TeamMember">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WebSiteAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CV" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="ProfilePictureUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MoneyIncomes" Relationship="EARGETeamDBModel.FK_MoneyIncomes_TeamMembers" FromRole="TeamMember" ToRole="MoneyIncome" />
+          <NavigationProperty Name="MoneyIncomes1" Relationship="EARGETeamDBModel.FK_MoneyIncomes_TeamMembers1" FromRole="TeamMember" ToRole="MoneyIncome" />
+          <NavigationProperty Name="MoneyOutgoings" Relationship="EARGETeamDBModel.FK_MoneyOutgoings_TeamMembers" FromRole="TeamMember" ToRole="MoneyOutgoing" />
+          <NavigationProperty Name="MoneyOutgoings1" Relationship="EARGETeamDBModel.FK_MoneyOutgoings_TeamMembers1" FromRole="TeamMember" ToRole="MoneyOutgoing" />
+          <NavigationProperty Name="MoneyOutgoings2" Relationship="EARGETeamDBModel.FK_MoneyOutgoings_TeamMembers2" FromRole="TeamMember" ToRole="MoneyOutgoing" />
+          <NavigationProperty Name="Projects" Relationship="EARGETeamDBModel.FK_Projects_TeamMembers" FromRole="TeamMember" ToRole="Project" />
+          <NavigationProperty Name="ProjectTasks" Relationship="EARGETeamDBModel.FK_ProjectTasks_TeamMembers" FromRole="TeamMember" ToRole="ProjectTask" />
+          <NavigationProperty Name="SysLogs" Relationship="EARGETeamDBModel.FK_SysLogs_TeamMembers" FromRole="TeamMember" ToRole="SysLog" />
+          <NavigationProperty Name="TeamMemberRoles" Relationship="EARGETeamDBModel.FK_TeamMemberRoles_TeamMembers" FromRole="TeamMember" ToRole="TeamMemberRole" />
+        </EntityType>
+        <Association Name="FK_MoneyIncomes_TeamMembers">
+          <End Type="EARGETeamDBModel.TeamMember" Role="TeamMember" Multiplicity="1" />
+          <End Type="EARGETeamDBModel.MoneyIncome" Role="MoneyIncome" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamMember">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MoneyIncome">
+              <PropertyRef Name="TeamMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MoneyIncomes_TeamMembers1">
+          <End Type="EARGETeamDBModel.TeamMember" Role="TeamMember" Multiplicity="1" />
+          <End Type="EARGETeamDBModel.MoneyIncome" Role="MoneyIncome" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamMember">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MoneyIncome">
+              <PropertyRef Name="CreateUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MoneyOutgoings_Projects">
+          <End Type="EARGETeamDBModel.Project" Role="Project" Multiplicity="0..1" />
+          <End Type="EARGETeamDBModel.MoneyOutgoing" Role="MoneyOutgoing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MoneyOutgoing">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MoneyOutgoings_ProjectTasks">
+          <End Type="EARGETeamDBModel.ProjectTask" Role="ProjectTask" Multiplicity="0..1" />
+          <End Type="EARGETeamDBModel.MoneyOutgoing" Role="MoneyOutgoing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectTask">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MoneyOutgoing">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MoneyOutgoings_TeamMembers">
+          <End Type="EARGETeamDBModel.TeamMember" Role="TeamMember" Multiplicity="0..1" />
+          <End Type="EARGETeamDBModel.MoneyOutgoing" Role="MoneyOutgoing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamMember">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MoneyOutgoing">
+              <PropertyRef Name="ApprovedMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MoneyOutgoings_TeamMembers1">
+          <End Type="EARGETeamDBModel.TeamMember" Role="TeamMember" Multiplicity="1" />
+          <End Type="EARGETeamDBModel.MoneyOutgoing" Role="MoneyOutgoing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamMember">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MoneyOutgoing">
+              <PropertyRef Name="CreateUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MoneyOutgoings_TeamMembers2">
+          <End Type="EARGETeamDBModel.TeamMember" Role="TeamMember" Multiplicity="1" />
+          <End Type="EARGETeamDBModel.MoneyOutgoing" Role="MoneyOutgoing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamMember">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MoneyOutgoing">
+              <PropertyRef Name="TeamMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_TeamMembers">
+          <End Type="EARGETeamDBModel.TeamMember" Role="TeamMember" Multiplicity="1" />
+          <End Type="EARGETeamDBModel.Project" Role="Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamMember">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="ProjectOwnerMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTasks_Projects">
+          <End Type="EARGETeamDBModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="EARGETeamDBModel.ProjectTask" Role="ProjectTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectTask">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTasks_TaskStatuses">
+          <End Type="EARGETeamDBModel.TaskStatus" Role="TaskStatus" Multiplicity="1" />
+          <End Type="EARGETeamDBModel.ProjectTask" Role="ProjectTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectTask">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTasks_TeamMembers">
+          <End Type="EARGETeamDBModel.TeamMember" Role="TeamMember" Multiplicity="0..1" />
+          <End Type="EARGETeamDBModel.ProjectTask" Role="ProjectTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamMember">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectTask">
+              <PropertyRef Name="AssignedMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamMemberRoles_Roles">
+          <End Type="EARGETeamDBModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="EARGETeamDBModel.TeamMemberRole" Role="TeamMemberRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeamMemberRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysLogs_SysLogTypes">
+          <End Type="EARGETeamDBModel.SysLogType" Role="SysLogType" Multiplicity="1" />
+          <End Type="EARGETeamDBModel.SysLog" Role="SysLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysLogType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysLog">
+              <PropertyRef Name="LogTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysLogs_TeamMembers">
+          <End Type="EARGETeamDBModel.TeamMember" Role="TeamMember" Multiplicity="0..1" />
+          <End Type="EARGETeamDBModel.SysLog" Role="SysLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamMember">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysLog">
+              <PropertyRef Name="LogCreatedByMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamMemberRoles_TeamMembers">
+          <End Type="EARGETeamDBModel.TeamMember" Role="TeamMember" Multiplicity="0..1" />
+          <End Type="EARGETeamDBModel.TeamMemberRole" Role="TeamMemberRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamMember">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeamMemberRole">
+              <PropertyRef Name="TeamMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EARGETeamDBModelStoreContainer" CdmEntityContainer="earge_teamDb">
+          <EntitySetMapping Name="MoneyIncomes">
+            <EntityTypeMapping TypeName="EARGETeamDBModel.MoneyIncome">
+              <MappingFragment StoreEntitySet="MoneyIncomes">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="TeamMemberId" ColumnName="TeamMemberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MoneyOutgoings">
+            <EntityTypeMapping TypeName="EARGETeamDBModel.MoneyOutgoing">
+              <MappingFragment StoreEntitySet="MoneyOutgoings">
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+                <ScalarProperty Name="ApprovedMemberId" ColumnName="ApprovedMemberId" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="TeamMemberId" ColumnName="TeamMemberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="EARGETeamDBModel.Project">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="ProjectOwnerMemberId" ColumnName="ProjectOwnerMemberId" />
+                <ScalarProperty Name="Budget" ColumnName="Budget" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectTasks">
+            <EntityTypeMapping TypeName="EARGETeamDBModel.ProjectTask">
+              <MappingFragment StoreEntitySet="ProjectTasks">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="BudgetAmount" ColumnName="BudgetAmount" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="HoursEffort" ColumnName="HoursEffort" />
+                <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+                <ScalarProperty Name="AssignedDate" ColumnName="AssignedDate" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="TargetGroups" ColumnName="TargetGroups" />
+                <ScalarProperty Name="AssignedMemberId" ColumnName="AssignedMemberId" />
+                <ScalarProperty Name="PublishedDate" ColumnName="PublishedDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="EARGETeamDBModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleDescription" ColumnName="RoleDescription" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="EARGETeamDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysLogs">
+            <EntityTypeMapping TypeName="EARGETeamDBModel.SysLog">
+              <MappingFragment StoreEntitySet="SysLogs">
+                <ScalarProperty Name="TargetObjectId" ColumnName="TargetObjectId" />
+                <ScalarProperty Name="LogCreatedByMemberId" ColumnName="LogCreatedByMemberId" />
+                <ScalarProperty Name="LogTypeId" ColumnName="LogTypeId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysLogTypes">
+            <EntityTypeMapping TypeName="EARGETeamDBModel.SysLogType">
+              <MappingFragment StoreEntitySet="SysLogTypes">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskStatuses">
+            <EntityTypeMapping TypeName="EARGETeamDBModel.TaskStatus">
+              <MappingFragment StoreEntitySet="TaskStatuses">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeamMemberRoles">
+            <EntityTypeMapping TypeName="EARGETeamDBModel.TeamMemberRole">
+              <MappingFragment StoreEntitySet="TeamMemberRoles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="TeamMemberId" ColumnName="TeamMemberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeamMembers">
+            <EntityTypeMapping TypeName="EARGETeamDBModel.TeamMember">
+              <MappingFragment StoreEntitySet="TeamMembers">
+                <ScalarProperty Name="ProfilePictureUrl" ColumnName="ProfilePictureUrl" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="CV" ColumnName="CV" />
+                <ScalarProperty Name="WebSiteAddress" ColumnName="WebSiteAddress" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

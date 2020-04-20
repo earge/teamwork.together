@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EARGE.Team", "EARGE.Team\EARGE.Team.csproj", "{41766809-99C3-4EF5-9631-6AEC042224D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EARGE.DataLayer", "EARGE.DataLayer\EARGE.DataLayer.csproj", "{67FF4437-0BB3-4A3D-852E-6D49DFABF930}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EARGE.BusinessLayer", "EARGE.BusinessLayer\EARGE.BusinessLayer.csproj", "{E67051F2-6588-486A-95FA-779F037884D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EARGE.TeamAdmin", "EARGE.TeamAdmin\EARGE.TeamAdmin.csproj", "{EC684734-C1F2-42E6-A64E-D183F0DD37EC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{41766809-99C3-4EF5-9631-6AEC042224D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41766809-99C3-4EF5-9631-6AEC042224D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41766809-99C3-4EF5-9631-6AEC042224D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41766809-99C3-4EF5-9631-6AEC042224D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67FF4437-0BB3-4A3D-852E-6D49DFABF930}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67FF4437-0BB3-4A3D-852E-6D49DFABF930}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67FF4437-0BB3-4A3D-852E-6D49DFABF930}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67FF4437-0BB3-4A3D-852E-6D49DFABF930}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E67051F2-6588-486A-95FA-779F037884D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E67051F2-6588-486A-95FA-779F037884D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E67051F2-6588-486A-95FA-779F037884D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E67051F2-6588-486A-95FA-779F037884D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC684734-C1F2-42E6-A64E-D183F0DD37EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC684734-C1F2-42E6-A64E-D183F0DD37EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC684734-C1F2-42E6-A64E-D183F0DD37EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC684734-C1F2-42E6-A64E-D183F0DD37EC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

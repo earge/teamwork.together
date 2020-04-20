@@ -1,0 +1,31 @@
+﻿@{
+    TeamMember User = null;
+    if (System.Web.HttpContext.Current.Session["MEMBER"] != null) {
+        User = (EARGE.DataLayer.TeamMember)System.Web.HttpContext.Current.Session["MEMBER"];
+    }
+}
+
+@if (User != null) {
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" })) {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav">
+            <li>@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
+            <li>@Html.ActionLink("Kasa", "Index", "MoneyIncomes")</li>
+            <li>@Html.ActionLink("Giderler", "Index", "MoneyOutgoings")</li>
+            <li>@Html.ActionLink("Projeler", "Index", "Projects")</li>
+            <li>@Html.ActionLink("İşler", "Index", "ProjectTasks")</li>
+            <li>@Html.ActionLink("Ekip", "Index", "TeamMembers")</li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink(User.FirstName+" "+User.LastName, "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+    }
+} else {
+    <ul class="nav navbar-nav navbar-right"> 
+       <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

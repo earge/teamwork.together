@@ -1,0 +1,94 @@
+﻿@model IEnumerable<EARGE.DataLayer.MoneyIncome>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TransactionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsApproved)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Deleted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TeamMember.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TeamMember1.Email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TransactionDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsApproved)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Deleted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TeamMember.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TeamMember1.Email)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
+
+<p>
+    <div class="panel panel-default">
+        <div class="panel-heading panel-title">
+            Hesap Bilgileri
+        </div>
+        <div class="panel-body">
+
+            ENPARA - FİNANSBANK<br />
+            MURAT UYSAL <br />
+            IBAN:  TR45 0011 1000 0000 0056 1017 82<br />
+            HESAP NO: 
+
+            <br />
+            <br />
+
+            ENPARA KREDİ KARTI BİLGİLERİ<br />
+
+            Kart numarası 	4987 4918 7989 0507 	<br/>
+            Son kullanma tarihi 	12/19 	<br />
+            CVV 506<br />
+
+        </div>
+    </div>
+</p>
